@@ -1,44 +1,51 @@
 ## Generic
 
-- 특정 type에 종속되지 않는 코드를 작성할 수 있게 해줌
-- 유연하고 재사용성이 높음
-- 명확한 의도를 표현할 수 있음
-- Collection들도 generic을 이용함
+- 제네릭을 이용해 코드를 구현하면 어떤 타입에도 유연하게 대응할 수 있습니다.
+- 제네릭을 사용한 타입은 재사용이 쉽고 중복을 줄여줍니다.
+- Array, Set, Dictionary 모두 제네릭 타입입니다.
 
 ```swift
-func swapTwoValues<T>(_ a: inout T,_ b: inout T){
-  let temporaryA = a
-  a = b
-  b = temporaryA
+//제네릭을 사용하지 않았을 때
+func swapTwoInts(_ a: inout Int, _ b: inout Int){
+    let temporaryA: Int = a
+    a = b
+    b = temporaryA
 }
+
+var numberOne: Int = 5
+var numberTwo: Int = 10
+
+swapTwoInts(&numberOne, &numberTwo)
+print("\(numberOne), \(numberTwo)") // 10, 5
+
+
+
 ```
 
+- 위 코드는 Int 자료형만 Swap할 수 있다
+  - 그렇다면 Any로 바꾸면 되지 않을까??
+    - swap하는데에는 무리는 없지만, Any 타입의 두 변수에 어떤 값이 들어있는지 모르기에 Int면 Int끼리 String이면 String 끼리 교환하고 싶을 때, 그런 제한을 줄 수 없다.
+    - 또, 전달인자의 타입은 Any로 전달되어야 하는데, 다른 타입인 String이나 Int타입의 변수를 전달인자로 전달할 수 없다. 그래서 String 타입값을 Any 타입의 변수에 넣어서 함수를 호출해야하는데, 이때 값을 복사하여 할당한다. 즉, 새로운 변수로만 함수를 호출할 수 있게 된다.
+- 따라서, 제네릭함수를 쓰게 된다면
 
+```swift
+//제네릭을 사용할 때
+func swapTwoValues<T>(_ a: inout T, _ b: inout T){
+    let temporaryA: T = a
+    a = b
+    b = temporaryA
+}
+var stringOne: String = "abc"
+var stringTwo: String = "def"
 
-#### Type Parameters
+swapTwoValues(&numberOne, &numberTwo)
+swapTwoValues(&stringOne, &stringTwo)
 
-- Type parameter는 <> 사이에 placeholder type을 지정하고 이름을 할당
-- placeholder는 실제 존재하는 type이 아니므로 해당 type을 찾지 않음
-- Function의 parameter type이나 return type으로 사용 가능하며 function 내부에서 사용됨
-- function이 실제로 사용될 때 type interference를 통해 실제 전달되는 value의 type을 찾아 교체됨
-- Type parameter는 한 개 이상 지정 가능하며 ","로 구분하여 명시
-- 용도에 따라 적합한 이름을 붙여줌.
-  - Dictionary에서는 Key, Value라고, Array에서는 Element라고 표기
-  - 특별한 의미가 없을 때는 T,U,V 같은 문자를 이용
+numberOne
+numberTwo
+stringOne
+stringTwo
 
-#### Associated Type
+//모든 Type에서 Swap할 수 있다.
+```
 
-- protocol을 정의할 때 그 protocol이 사용할 임의의 type을 선언해 둘 수 있음
-
-- associatedtype이라는 keyword를 사용
-
-- ```swift
-  protocol Container{
-    associatedtype Item	//Item이라는 type이 있다 정도로 정의
-    mutating func append(_ item: Item)
-    var count: Int{ get }
-    subscript(i: Int) -> Item{ get }	//실제로 존재하지 않는 Item을 이용
-  }
-  ```
-
-  
