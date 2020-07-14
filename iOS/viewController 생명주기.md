@@ -61,7 +61,7 @@
 
 ## 정리
 
-![image-20200715003050248](../img/image-20200715003050248.png)
+<img src="../img/image-20200715003050248.png" alt="image-20200715003050248" style="zoom:33%;" />
 
 - 1st -> 2nd -> 1st 가는 상황
 - 1st viewDidDisappear는 2nd viewWillAppear 호출 후에 호출된다!!!
