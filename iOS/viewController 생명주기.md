@@ -4,7 +4,7 @@
 
 > 보여줬다가~~~~ 사라졌다.
 
-<img src="/Users/user/Desktop/TIL/img/image-20200715001016925.png" alt="image-20200715001016925" style="zoom:53%;" />
+<img src="/./img/image-20200715001016925.png" alt="image-20200715001016925" style="zoom:53%;" />
 
 
 
@@ -61,7 +61,7 @@
 
 ## 정리
 
-![image-20200715003050248](/Users/user/Desktop/TIL/img/image-20200715003050248.png)
+![image-20200715003050248](./img/image-20200715003050248.png)
 
 - 1st -> 2nd -> 1st 가는 상황
 - 1st viewDidDisappear는 2nd viewWillAppear 호출 후에 호출된다!!!
