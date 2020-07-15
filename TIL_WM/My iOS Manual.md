@@ -139,4 +139,105 @@
       ```
 
     - 스토리 보드에서 Save 버튼을 종료항목으로 컨트롤 드래그한다
+    
+15. FoodTracker에서 네비게이션에서 cancel을 눌렀을 때 2가지 방안이 있다
 
+    1. 추가할 때 cancel
+    2. 편집할 때 cancel
+
+    - 2가지 경우를 나누기 위해
+
+      - ```swift
+            @IBAction func cancel(_ sender: Any) {
+                //Depending on style of presentation (modal or push presentation), this view controller needs to be dismissed in two different ways.
+                let isPresentingAddMealMore = presentingViewController is UINavigationController
+                
+                if isPresentingAddMealMore{
+                    dismiss(animated: true, completion: nil)
+                }
+                else if let owningNavigationController = navigationController{
+                    owningNavigationController.popViewController(animated: true)
+                }else{
+                    fatalError("The MealViewController is not inside a navigation controller")
+                }
+            }
+        ```
+
+16. TabelView에서 목록 편집하는 버튼 만들기
+
+    ```swift
+    //테이블뷰 컨트롤러에서
+    override func viewDidLoad(){
+      super.viewDidLoad()
+      navigationItem.leftBarButtonItem = editButtonItem
+    }
+    ```
+
+    - 이렇게만 하면 삭제하기 버튼만 있고 구현은 안되어있다.
+
+      ```swift
+          override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+              if editingStyle == .delete{
+                  //데이터 소스에서 행을 삭제
+                  meals.remove(at: indexPath.row)
+                  tableView.deleteRows(at: [indexPath], with: .fade)
+              }else if editingStyle == .insert {
+                  //Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+              }
+          }
+          
+          override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+              //false를 리턴하면 edit을 못하도록 한다.
+              return true
+          }
+      ```
+
+      이 오버라이드를 추가하고 구현해야 비로소 삭제가 완료된다.
+
+17. 네비게이션 컨트롤러 위에 네비게이션 컨트롤러가 올라갈 수 없기 때문에, 위에 올라가는 네비게이션 컨트롤러는 modal 스타일로 올라가게된다(show로 지정을 하더라도)
+
+18. NSCoding과 NSObject
+
+    - NSCoding
+      - 클래스가 해당 클래스의 인스턴스를 인코딩하고 디코딩할 수 있도록 구현해야하는 두가지 방법을 선언한다. (저장과 배포의 기초)
+      - OOP 설계원리를 따라 인코딩되거나 디코딩 되는 객체는 해당 인스턴스 변수를 인코딩하고 디코딩하는 역할을 담당한다.
+      - encode(with: )
+        - 클래스 정보를 보관할 준비를 하고 이니셜라이즈는 클래스를 만들 때 데이터를 보관 해제한다.
+    - NSObject
+      - 대부분의 Objective-C클래스 계층의 루트 클래스입니다. 여기서 하위 클래스는 기본 인터페이스를 런타임 시스템에 상속하고 Object-C 개체로 동작하는 기능을 상속한다.
+
+19. NS의 뜻이 무엇인가..
+
+    - 이런 접두사는 같은 식별자가 두 개의 다른 대상에 쓰일 때 결과적으로 큰 문제가 되는 이름 충돌(name collisions) 사태를 막는데 도움이 된다
+    - NS접두사는 이 툴킷이 NextSTEP이라고 불리며 NeXT Software의 제품이었던 때로 거슬러 올라간다. NextSTEP을 위해 이미 작성된 코드와의 호환을 유지하기 위해 애플은 NS 접두사를 쓴다.
+
+    > NS는 회사 이름이고 , 거기에서 뭐 추가해서 만든 클래스들의 기능을 쓰기 위해 사용...
+
+20. Alert Action 구현하기
+
+    ```swift
+    @IBAction func addName(_ sender: Any) {
+            
+            //alert 버튼 생성
+            let alert = UIAlertController(title: "New Name", message: "Add a new name", preferredStyle: .alert)
+            let saveAction = UIAlertAction(title: "Save", style: .default){
+                [unowned self] action in
+                guard let textField = alert.textFields?.first, let nameToSave = textField.text else{
+                    return
+                }
+                
+                self.names.append(nameToSave)
+                self.tableView.reloadData()
+            }
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+            
+            alert.addTextField()
+            alert.addAction(saveAction)
+            alert.addAction(cancelAction)
+            
+            present(alert, animated: true)
+        }
+    ```
+
+    
