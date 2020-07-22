@@ -1,4 +1,4 @@
-## Core Data 작동 방식
+## Core Data 전체적인 개념
 
 
 
