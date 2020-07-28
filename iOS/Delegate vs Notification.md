@@ -8,8 +8,6 @@
 
 
 
-
-
 #### Delegate
 
 - 보통 protocol을 정의하여 사용한다. 
