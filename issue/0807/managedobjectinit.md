@@ -16,7 +16,7 @@
 
 - 두 개의 차이를 알기 위해 공식 문서를 찾아봤습니다.
 
-- <img src="/Users/user/Desktop/swift_study/internship/issue/0807/MOappleDoc.png" alt="MOappleDoc" style="zoom:50%;" />
+- <img src="./MOappleDoc.png" alt="MOappleDoc" style="zoom:50%;" />
 
 - init(entity: NSEntityDescription, insertInto: NSManagedObjectContext?)
   - Managed Object를 초기화하고 지정된 Managed Object Context에 데이터를 넣습니다.

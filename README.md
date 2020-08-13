@@ -115,3 +115,9 @@
 - [SearchBar 검색시 데이터 중복 저장 이슈](https://github.com/eogud7126/TIL/blob/master/issue/0802/searchBar%20이슈.md)
 - [NSFetchedResultController insert해도 자동으로 테이블뷰에 적용 안된 이슈](https://github.com/eogud7126/TIL/blob/master/issue/0807/fetchedresultcontroller_insert.md)
 - [Managed Object 초기화하는 2가지 방법](https://github.com/eogud7126/TIL/blob/master/issue/0807/managedobjectinit.md)
+- [Bool Predicate 이슈](https://github.com/eogud7126/TIL/blob/master/issue/0810/booleanPredicate이슈.md)
+- [date picker scrolling 이슈](https://github.com/eogud7126/TIL/blob/master/issue/0812/datePicker_scrolling_issue.md)
+- [date picker 외 다른 뷰 눌렀을 때 터치되는 이슈](https://github.com/eogud7126/TIL/blob/master/issue/0813/datepicker_tableView_issue.md)
+- [Dark Mode 대응](https://github.com/eogud7126/TIL/blob/master/issue/0813/darkmode대응.md)
+- [searchBar 켜진 채로 뒤로가기 했을 때 생긴 이슈](https://github.com/eogud7126/TIL/blob/master/issue/0814/searchbar_backIssue.md)
+
